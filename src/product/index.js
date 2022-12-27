@@ -58,7 +58,7 @@ const getProduct = async(productId) => {
     console.log("getProduct");
     try{
         const params = {
-            TableName: process.env.DYNAMODB_TABLE_NAME,
+            TableName: process.env.DYNAMODB_TABLE_NAME, //Gets from env of lambda function
             Key: marshall({id: productId})
         }
         const data = await ddbClient.send(new GetItemCommand(params));

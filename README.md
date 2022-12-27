@@ -53,3 +53,7 @@ So, in summary, JSON.parse() is a specific function in JavaScript that is used t
 new cdk.CfnOutput(stack, 'EnvVars', {
   value: JSON.stringify(process.env, null, 2)
 });
+
+ new cdk.CfnOutput(this, 'TableName', {
+      value: myTable.table.tableName
+    });
