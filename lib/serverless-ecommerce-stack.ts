@@ -13,7 +13,7 @@ export class ServerlessEcommerceStack extends cdk.Stack {
 
     // Dynamodb Table
     const productTable = new Table(this,"ProductTable",{
-      partitionKey: {name: id, type: AttributeType.STRING},
+      partitionKey: {name: 'id', type: AttributeType.STRING},
       tableName: "product",
       removalPolicy: RemovalPolicy.DESTROY, // for cdk destroy
       billingMode: BillingMode.PAY_PER_REQUEST

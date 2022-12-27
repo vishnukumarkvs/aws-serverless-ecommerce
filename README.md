@@ -50,3 +50,6 @@ unmarshal, on the other hand, is not a built-in JavaScript function. It is a ter
 
 So, in summary, JSON.parse() is a specific function in JavaScript that is used to parse JSON strings and convert them into JavaScript objects, while unmarshalling refers to the general process of deserializing serialized data.
 
+new cdk.CfnOutput(stack, 'EnvVars', {
+  value: JSON.stringify(process.env, null, 2)
+});

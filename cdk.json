@@ -1,5 +1,6 @@
 {
   "app": "npx ts-node --prefer-ts-exts bin/serverless-ecommerce.ts",
+  "requireApproval": "never",
   "watch": {
     "include": [
       "**"
