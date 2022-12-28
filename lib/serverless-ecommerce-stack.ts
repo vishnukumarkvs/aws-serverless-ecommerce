@@ -11,11 +11,13 @@ export class ServerlessEcommerceStack extends cdk.Stack {
     const database = new MyDatabase(this,'Database');
 
     const myservices = new MyServices(this, 'Microservices',{
-      productTable: database.productTable
+      productTable: database.productTable,
+      cartTable: database.cartTable
     })
 
     const apiGateways = new ApiGateways(this, 'Api Gateway',{
-      productFunction: myservices.productMicroservice
+      productFunction: myservices.productMicroservice,
+      cartFunction: myservices.cartMicroservice
     })
 
     new cdk.CfnOutput(this, 'productTablename', {
