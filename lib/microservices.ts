@@ -7,18 +7,21 @@ import { join } from "path";
 interface MyServicesProps{
     productTable: ITable;
     cartTable: ITable;
+    orderTable: ITable;
 }
   
 export class MyServices extends Construct{
 
     public readonly productMicroservice: NodejsFunction;
     public readonly cartMicroservice: NodejsFunction;
+    public readonly orderMicroservice: NodejsFunction;
 
     constructor(scope: Construct, id: string, props: MyServicesProps){
         super(scope,id);
 
         this.productMicroservice= this.createProductFunction(props.productTable);
         this.cartMicroservice=this.createCartFunction(props.cartTable);
+        this.orderMicroservice=this.createOrderFunction(props.orderTable);
     }
 
     // product lambda function
@@ -67,5 +70,29 @@ export class MyServices extends Construct{
 
         cartTable.grantReadWriteData(cartFunction);
         return cartFunction;
+    }
+
+    private createOrderFunction(orderTable:ITable):NodejsFunction{
+        const nodeJsFunctionProps: NodejsFunctionProps = {
+            bundling:{
+                externalModules:[
+                    'aws-sdk'
+                ]
+            },
+            environment:{
+                PRIMARY_KEY: 'username',
+                SORT_KEY: 'orderDate',
+                DYNAMODB_TABLE_NAME: orderTable.tableName
+            },
+            runtime: Runtime.NODEJS_14_X
+        }
+
+        const orderFunction = new NodejsFunction(this,'orderLambdaFunction',{
+            entry: join(__dirname,`/../src/order/index.js`),
+            ...nodeJsFunctionProps
+        })
+
+        orderTable.grantReadWriteData(orderFunction);
+        return orderFunction;
     }
 }

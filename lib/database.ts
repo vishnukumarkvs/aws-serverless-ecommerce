@@ -6,12 +6,14 @@ export class MyDatabase extends Construct{
     // create public member inside the class to export object
     public readonly productTable:ITable;
     public readonly cartTable:ITable;
+    public readonly orderTable:ITable;
     
     constructor(scope: Construct, id: string){
         super(scope,id);
 
         this.productTable = this.createProductTable();
         this.cartTable = this.createCartTable();
+        this.orderTable = this.createOrderTable();
        
     }
 
@@ -41,5 +43,17 @@ export class MyDatabase extends Construct{
             billingMode: BillingMode.PAY_PER_REQUEST
         });
         return productTable;
+    }
+
+    // order: PK - username -SK: orderDate --totalPrice -firstname -lastname
+    private createOrderTable(): ITable{
+        const orderTable = new Table(this,'order',{
+            partitionKey: {name: 'username', type: AttributeType.STRING},
+            sortKey: {name: 'orderDate', type: AttributeType.STRING},
+            tableName: "order",
+            removalPolicy: RemovalPolicy.DESTROY, // for cdk destroy
+            billingMode: BillingMode.PAY_PER_REQUEST
+        })
+        return orderTable;
     }
 }

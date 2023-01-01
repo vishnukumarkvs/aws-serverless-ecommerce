@@ -1,0 +1,12 @@
+[
+    {
+        "Source": "com.vis.cart.checkoutcart",
+        "DetailType":"CheckoutCart",
+        "EventBusName":"MyEventBus",
+        "Detail": "{\"username\":\"vis\",\"cart\":\"phone11\"}",
+        "Resources":[
+            "r1",
+            "r2"
+        ]
+    }
+]

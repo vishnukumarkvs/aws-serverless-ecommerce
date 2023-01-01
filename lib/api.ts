@@ -4,7 +4,8 @@ import { Construct } from "constructs";
 
 interface ApiGatewaysProps{
     productFunction: IFunction,
-    cartFunction: IFunction
+    cartFunction: IFunction,
+    orderFunction: IFunction
 }
 
 export class ApiGateways extends Construct{
@@ -13,6 +14,7 @@ export class ApiGateways extends Construct{
 
         this.createProductApi(props.productFunction);
         this.createCartApi(props.cartFunction);
+        this.createOrderApi(props.orderFunction);
     }
 
     private createProductApi(productFunction:IFunction){
@@ -59,6 +61,24 @@ export class ApiGateways extends Construct{
         const cartCheckout = cart.addResource("checkout");
         cartCheckout.addMethod("POST");
 
+    }
+
+
+    private createOrderApi(orderFunction:IFunction){
+        // GET /order
+        // GET /order/{username}
+        // GET /order/{username}`?orderDate=<date>
+        const apigw = new LambdaRestApi(this,'orderApi',{
+            handler: orderFunction,
+            proxy: false,
+            restApiName: "Order Microservice"
+        })
+
+        const order = apigw.root.addResource("order");
+        order.addMethod("GET");
+
+        const singleOrder = order.addResource("{username}")
+        singleOrder.addMethod("GET");
     }
 }
 

@@ -57,3 +57,6 @@ new cdk.CfnOutput(stack, 'EnvVars', {
  new cdk.CfnOutput(this, 'TableName', {
       value: myTable.table.tableName
     });
+
+
+    aws events put-events --entries file://checkoutcartevents.json
