@@ -59,7 +59,7 @@ export class MyServices extends Construct{
             environment:{
                 PRIMARY_KEY: 'username',
                 DYNAMODB_TABLE_NAME: cartTable.tableName,
-                EVENT_DETAIL_TYPE : "CheckoutBasket",
+                EVENT_DETAIL_TYPE : "CheckoutCart",
                 EVENT_SOURCE: "com.vis.cart.checkoutcart",
                 EVENTBUS_NAME: "MyEventBus"
             },

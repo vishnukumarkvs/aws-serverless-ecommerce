@@ -188,3 +188,15 @@ const getProductsByCategory = async(event) => {
         throw e;
     }
 }
+
+
+// Post request body
+
+
+// {
+//     "name": "Iphone 34",
+//     "description": "Phone product from Apple",
+//     "imageFile":"iphone13.png",
+//     "category":"phone",
+//     "price": 850
+// }

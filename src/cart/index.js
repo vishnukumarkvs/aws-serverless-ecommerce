@@ -1,7 +1,6 @@
 const { GetItemCommand, ScanCommand, PutItemCommand, DeleteItemCommand } = require("@aws-sdk/client-dynamodb");
 const { PutEventsCommand } = require("@aws-sdk/client-eventbridge");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
-const { ObjectFlags } = require("typescript");
 const { ddbClient } = require("../cart/ddbClient");
 const { ebClient } = require("./eventbridgeClient");
 
@@ -143,7 +142,7 @@ const checkoutCart = async(event) => {
     var checkoutPayload = preparePayload(checkoutRequest, cart);
     const publishEvent = await publishCheckoutcartEvent(checkoutPayload);
 
-    await deleteCart(checkoutCart.username);
+    await deleteCart(checkoutRequest.username);
 }
 
 
