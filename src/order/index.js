@@ -1,6 +1,5 @@
-const { PutItemCommand, QueryCommand } = require("@aws-sdk/client-dynamodb");
+const { PutItemCommand, QueryCommand, ScanCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
-const { getModeForFileReference } = require("typescript");
 const { ddbClient } = require("../cart/ddbClient");
 
 exports.handler = async function(event){
@@ -16,6 +15,7 @@ exports.handler = async function(event){
 
 const eventBridgeInvocation = async(event)=>{
     console.log(`eventBridgeInvocation function: ${event}`);
+    console.log(JSON.stringify(event, null, 2));
 
     //Normally order for doing the process to call the several microservices like invoice warehouse billing and so on.
     await createOrder(event.detail);

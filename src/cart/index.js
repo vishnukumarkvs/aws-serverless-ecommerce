@@ -141,6 +141,7 @@ const checkoutCart = async(event) => {
     const cart = await getCartByUsername(checkoutRequest.username);
     var checkoutPayload = preparePayload(checkoutRequest, cart);
     const publishEvent = await publishCheckoutcartEvent(checkoutPayload);
+    console.log(`Published Event: ${publishEvent}`)
 
     await deleteCart(checkoutRequest.username);
 }
@@ -208,4 +209,38 @@ const publishCheckoutcartEvent = async (payload) =>{
 //             "productName": "Potato Chips"
 //         }
 //     ]
+// }
+
+
+// Final event
+// {
+//     "version": "0",
+//     "id": "90331354-49fd-9ee1-de88-cc6378af2c94",
+//     "detail-type": "CheckoutCart",
+//     "source": "com.vis.cart.checkoutcart",
+//     "account": "895656015678",
+//     "time": "2023-01-14T18:38:38Z",
+//     "region": "us-east-1",
+//     "resources": [],
+//     "detail": {
+//         "username": "Vishnu",
+//         "total_price": 960,
+//         "email": "kvs.sankar23@gmail.com",
+//         "items": [
+//             {
+//                 "quantity": 2,
+//                 "color": "Red",
+//                 "productId": "aaaa-bbbb-cccc",
+//                 "price": 950,
+//                 "productName": "Iphone X"
+//             },
+//             {
+//                 "quantity": 1,
+//                 "color": "Blue",
+//                 "productId": "ffff-bbbb-cccc",
+//                 "price": 10,
+//                 "productName": "Potato Chips"
+//             }
+//         ]
+//     }
 // }
