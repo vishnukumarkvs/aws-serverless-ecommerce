@@ -6,6 +6,7 @@ import { ApiGateways } from './api';
 import { MyDatabase } from './database';
 import { MyEventBus } from './eventbus';
 import { MyServices } from './microservices';
+import { MyQueue } from './queue';
 
 export class ServerlessEcommerceStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -25,10 +26,16 @@ export class ServerlessEcommerceStack extends cdk.Stack {
       orderFunction: myservices.orderMicroservice
     })
 
+    const queue = new MyQueue(this,'OrderQueue',{
+      consumer: myservices.orderMicroservice
+    })
+
     const eventBus = new MyEventBus(this,'CustomEventBus',{
       publisherFunction: myservices.cartMicroservice,
-      targetFunction: myservices.orderMicroservice
+      //targetFunction: myservices.orderMicroservice
+      targetQueue: queue.orderQueue
     })
+
 
     new cdk.CfnOutput(this, 'productTablename', {
       value: database.productTable.tableName

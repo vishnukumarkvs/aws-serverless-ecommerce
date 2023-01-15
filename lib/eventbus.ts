@@ -1,11 +1,13 @@
 import { EventBus, Rule } from "aws-cdk-lib/aws-events";
-import { LambdaFunction } from "aws-cdk-lib/aws-events-targets";
+import { LambdaFunction, SqsQueue } from "aws-cdk-lib/aws-events-targets";
 import { IFunction } from "aws-cdk-lib/aws-lambda";
+import { IQueue } from "aws-cdk-lib/aws-sqs";
 import { Construct } from "constructs";
 
 interface MyEventBusProps{
-    publisherFunction: IFunction,
-    targetFunction: IFunction
+    publisherFunction: IFunction;
+    targetQueue: IQueue;
+    //targetFunction: IFunction
 }
 
 
@@ -29,7 +31,8 @@ export class MyEventBus extends Construct{
           }
         })
     
-        checkoutCartRule.addTarget(new LambdaFunction(props.targetFunction));
+        // checkoutCartRule.addTarget(new LambdaFunction(props.targetFunction));
+        checkoutCartRule.addTarget(new SqsQueue(props.targetQueue));
 
         // AccessDeniedException - not authorized to perform: events:PutEvents
         bus.grantPutEventsTo(props.publisherFunction)
