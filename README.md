@@ -62,3 +62,5 @@ new cdk.CfnOutput(stack, 'EnvVars', {
     aws events put-events --entries file://checkoutcartevents.json
 
 npm install @aws-sdk/client-eventbridge
+
+sqs integration pending
