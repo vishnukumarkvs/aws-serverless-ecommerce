@@ -1,66 +1,52 @@
-# Welcome to your CDK TypeScript project
+# Creating Ecommerce Backend in Serverless using AWS CDK and AWS SDK
+System Design
 
-This is a blank project for CDK development with TypeScript.
+![AWS Serverless Ecommerce cdk](https://user-images.githubusercontent.com/116954249/215372676-efc4b923-7bc3-4c4d-aa57-4c2c2034c972.png)
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
-## Useful commands
+I developed an Ecommerce backend on AWS using AWS SDK for business logic and AWS CDK for infrastructure creation. The solution features 3 APIs in API Gateway, serverless business logic with AWS Lambda, and data storage in DynamoDB. I have developed 3 microservices: Product, Cart and Order microservice. Communication between the cart and order microservices is handled asynchronously via AWS EventBridge and SQS.
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
+
+## CDK commands
+
 * `cdk synth`       emits the synthesized CloudFormation template
+* `cdk diff`        compare deployed stack with current state
+* `cdk deploy`      deploy this stack to your default AWS account/region
 
+## API DOC
+### Product
+- /product
+   - GET
+   - POST
+- /product/{id}
+	- GET
+	- PUT
+	- DELETE 
 
-## REST requests
-- List products
-- Filter products as per categories
-- CRUD products
-- Add item to cart
-- Checkout cart and create new order
-- Delete cart
+### Cart
+- /cart
+   - GET
+   - POST
+- /cart/{username}
+	- GET
+	- POST
+	- DELETE 
+- /cart/checkout
+   - POST
 
-## Microservices Pattern:
-- Product
-  - List products
-  - Filter products per categories
-  - CRUD products
-- Cart
-  - Add item to cart
-  - Delete item in cart
-  - Checkout cart and create order
-- Order
-  - List my orders
-  - Query my orders with orderDate
+### Order
+- /order
+   - GET
+- /order/{username}
+	- GET
 
+## DynamoDB Tables and Lambda Functions
+I have created 3 dynamodb tables for storing data.
+- product table 
+- cart table
+- order table
 
----
+Similarly, I have created 3 lambda functions and integrated these tables.	
 
-Serverless infra - AWS CDK - Cloud Development Kit
-Microservices Development - AWS SDK - Software Development Kit
-
-
-npm install @aws-sdk/client-dynamodb
-npm install @aws-sdk/util-dynamodb
-
-JSON.parse() is a method in JavaScript that parses a JSON string and returns a JavaScript object constructed from the JSON data. It takes a JSON string as input and returns a JavaScript object or array.
-unmarshal, on the other hand, is not a built-in JavaScript function. It is a term used in the context of serialization and refers to the process of deserializing data that has been stored or transmitted in a serialized format, such as JSON or XML. In JavaScript, you can use JSON.parse() to unmarshal JSON data.
-
-So, in summary, JSON.parse() is a specific function in JavaScript that is used to parse JSON strings and convert them into JavaScript objects, while unmarshalling refers to the general process of deserializing serialized data.
-
-new cdk.CfnOutput(stack, 'EnvVars', {
-  value: JSON.stringify(process.env, null, 2)
-});
-
- new cdk.CfnOutput(this, 'TableName', {
-      value: myTable.table.tableName
-    });
-
-
-    aws events put-events --entries file://checkoutcartevents.json
-
-npm install @aws-sdk/client-eventbridge
-
-sqs integration pending
+## AWS EventBridge
+The cart and order microservices are connected asynchronously using AWS EventBridge and SQS. When the `/cart/checkout` endpoint is triggered, an event containing cart items and total price is sent to EventBridge. The order service, subscribed to EventBridge, retrieves messages from the SQS queue and processes the order.
