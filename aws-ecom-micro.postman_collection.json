@@ -1,0 +1,341 @@
+{
+	"info": {
+		"_postman_id": "d9e3d6ed-49c3-4dc3-b62c-e52abc4d9770",
+		"name": "aws-ecom-micro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17352581"
+	},
+	"item": [
+		{
+			"name": "Product Microservice",
+			"item": [
+				{
+					"name": "product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Iphone 34\",\r\n    \"description\": \"Phone product from Apple\",\r\n    \"imageFile\":\"iphone13.png\",\r\n    \"category\":\"phone\",\r\n    \"price\": 850\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{productEndpoint}}/product",
+							"host": [
+								"{{productEndpoint}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productEndpoint}}/product",
+							"host": [
+								"{{productEndpoint}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "productById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{productEndpoint}}/product/5937a6cd-799e-4a66-b64e-67a19cdfff35",
+							"host": [
+								"{{productEndpoint}}"
+							],
+							"path": [
+								"product",
+								"5937a6cd-799e-4a66-b64e-67a19cdfff35"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{productEndpoint}}/product/64e7818e-d54f-49b2-967f-ef8d61633124",
+							"host": [
+								"{{productEndpoint}}"
+							],
+							"path": [
+								"product",
+								"64e7818e-d54f-49b2-967f-ef8d61633124"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\":750\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{productEndpoint}}/product/5937a6cd-799e-4a66-b64e-67a19cdfff35",
+							"host": [
+								"{{productEndpoint}}"
+							],
+							"path": [
+								"product",
+								"5937a6cd-799e-4a66-b64e-67a19cdfff35"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart Microservice",
+			"item": [
+				{
+					"name": "cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cartEndpoint}}/cart",
+							"host": [
+								"{{cartEndpoint}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cartByUsername",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cartEndpoint}}/cart/Sankar",
+							"host": [
+								"{{cartEndpoint}}"
+							],
+							"path": [
+								"cart",
+								"Sankar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cartByUsername",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{cartEndpoint}}/cart/Vishnu",
+							"host": [
+								"{{cartEndpoint}}"
+							],
+							"path": [
+								"cart",
+								"Vishnu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Vishnu\",\r\n    \"items\": [\r\n        {\r\n            \"quantity\": 2,\r\n            \"color\": \"Red\",\r\n            \"price\": 950,\r\n            \"productId\": \"aaaa-bbbb-cccc\",\r\n            \"productName\": \"Iphone X\"\r\n        },\r\n        {\r\n            \"quantity\": 1,\r\n            \"color\": \"Blue\",\r\n            \"price\": 10,\r\n            \"productId\": \"ffff-bbbb-cccc\",\r\n            \"productName\": \"Potato Chips\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cartEndpoint}}/cart",
+							"host": [
+								"{{cartEndpoint}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cart2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Sankar\",\r\n    \"items\": [\r\n        {\r\n            \"quantity\": 1,\r\n            \"color\": \"Red\",\r\n            \"price\": 950,\r\n            \"productId\": \"jkjk-bbbb-cccc\",\r\n            \"productName\": \"Iphone 11\"\r\n        },\r\n        {\r\n            \"quantity\": 1,\r\n            \"color\": \"Blue\",\r\n            \"price\": 11,\r\n            \"productId\": \"jkjk-ioio-cccc\",\r\n            \"productName\": \"Potato Chips\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cartEndpoint}}/cart",
+							"host": [
+								"{{cartEndpoint}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cart checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Vishnu\",\r\n    \"total_price\": 0,\r\n    \"email\": \"kvs.vishnu23@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cartEndpoint}}/cart/checkout",
+							"host": [
+								"{{cartEndpoint}}"
+							],
+							"path": [
+								"cart",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order Microservice",
+			"item": [
+				{
+					"name": "order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orderEndpoint}}/order",
+							"host": [
+								"{{orderEndpoint}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orderByUsername",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orderEndpoint}}/order/Sankar?orderDate=2023-01-14T18:07:46.539Z",
+							"host": [
+								"{{orderEndpoint}}"
+							],
+							"path": [
+								"order",
+								"Sankar"
+							],
+							"query": [
+								{
+									"key": "orderDate",
+									"value": "2023-01-14T18:07:46.539Z"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "productEndpoint",
+			"value": "https://y32rf0z8u8.execute-api.us-east-1.amazonaws.com/prod/",
+			"type": "string"
+		},
+		{
+			"key": "cartEndpoint",
+			"value": "https://a3gy1lhvh9.execute-api.us-east-1.amazonaws.com/prod/",
+			"type": "string"
+		},
+		{
+			"key": "orderEndpoint",
+			"value": "https://yrvtbodsf5.execute-api.us-east-1.amazonaws.com/prod/",
+			"type": "string"
+		}
+	]
+}
