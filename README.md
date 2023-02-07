@@ -6,6 +6,14 @@ System Design
 
 I developed an Ecommerce backend on AWS using AWS SDK for business logic and AWS CDK for infrastructure creation. The solution features 3 APIs in API Gateway, serverless business logic with AWS Lambda, and data storage in DynamoDB. I have developed 3 microservices: Product, Cart and Order microservice. Communication between the cart and order microservices is handled asynchronously via AWS EventBridge and SQS.
 
+## Tech Stack
+- AWS
+- AWS CDK for Infrastructure
+- AWS SDK for business logic
+- AWS Lambda
+- AWS DynamoDB
+- AWS EventBridge
+- AWS SQS
 
 ## CDK commands
 
